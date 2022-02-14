@@ -13,11 +13,11 @@ export const Product = () => {
   const { title, cost, category } = formData;
 
   const changes= (event) => {
-      const {name,value} =event.target
-      setformData(prev=> ({ ...prev , [name]: value}))
+      const {name,value} = event.target
+      setformData( prev => ({ ...prev , [name]: value}))
   } 
 
-  const onsubmit = () => {
+  const onSubmit = () => {
     // event.preventdefault();
     console.log(formData);
 
@@ -26,7 +26,7 @@ export const Product = () => {
   return (
     //<div ref={ref}>
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <label>
           TITLE:-
           <input type="text" name="title" value={title} onChange={changes}/>
@@ -39,19 +39,20 @@ export const Product = () => {
         <br />
         <label>
             IMAGE:-
-          <input type="file" ref={fileref} onChange={changes}/>
+          <input type="file" ref={fileref} />
         </label>
         <br />
         <label>
           CATEGORY:-
           <select name="category" value={category} onChange={changes}> 
-            <option>Select</option>
-            <option>Vegetables</option>
-            <option>Fruits</option>
-            <option>Provisions</option>
+            <option >Select</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="fruits">Fruits</option>
+            <option value="provisions">Provisions</option>
           </select>
         </label>
-        <button onClick={onsubmit}>Submit</button>
+        <br/>
+        <input type="submit"/>
         <br />
       </form>
     </div>
