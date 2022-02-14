@@ -1,33 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+const initstate = {
+  title: "",
+  cost: "",
+  file: "",
+  category: "",
+};
 
 export const Product = () => {
+  const fileref =React.useRef()
+
+  const [formData, setformData] = useState(initstate);
+  const { title, cost, category } = formData;
+
+  const changes= (event) => {
+      const {name,value} =event.target
+      setformData(prev=> ({ ...prev , [name]: value}))
+  } 
+
+  const onsubmit = () => {
+    // event.preventdefault();
+    console.log(formData);
+
+    // console.log(ref.current.files[0]);
+  };
   return (
+    //<div ref={ref}>
     <div>
       <form>
         <label>
-            TITLE:-
-          <input type="text" />
+          TITLE:-
+          <input type="text" name="title" value={title} onChange={changes}/>
         </label>
         <br />
         <label>
-            COST            
-          <input type="number" />
+          COST
+          <input type="number" name="cost" value={cost} onChange={changes}/>
         </label>
         <br />
         <label>
             IMAGE:-
-          <input type="file" />
+          <input type="file" ref={fileref} onChange={changes}/>
         </label>
         <br />
         <label>
-            CATEGORY:-
-          <select>
-              <option>Select</option>
-              <option>Vegetables</option>
-              <option>Fruits</option>
-              <option>Provisions</option>
+          CATEGORY:-
+          <select name="category" value={category} onChange={changes}> 
+            <option>Select</option>
+            <option>Vegetables</option>
+            <option>Fruits</option>
+            <option>Provisions</option>
           </select>
         </label>
+        <button onClick={onsubmit}>Submit</button>
         <br />
       </form>
     </div>
